@@ -14,3 +14,9 @@ Pieces protecting the king from check can't be moved
 Press 'r' to reset board
 
 Press 'z' to undo last move(s) 
+
+**Screenshots**
+
+![](Screenshots/recoloredBoard.jpg)
+![](Screenshots/Rook.jpg)
+![](Screenshots/bWins.jpg)
