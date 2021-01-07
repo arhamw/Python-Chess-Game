@@ -103,6 +103,7 @@ def main():
             drawText(screen, 'Stalemate')
         clock.tick(MAX_FPS)
         p.display.flip()
+
 '''
 Highlight square selected and moves for piece selected
 '''

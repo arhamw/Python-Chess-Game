@@ -29,6 +29,7 @@ class GameState:
         self.currentCastlingRight = CastleRights(True, True, True, True)
         self.castleRightsLog = [CastleRights(self.currentCastlingRight.wks, self.currentCastlingRight.bks,
                                              self.currentCastlingRight.wqs, self.currentCastlingRight.bqs)]
+
     '''
     Takes a Move as a  parameter and executes it (this will not work for castling, pawn promotion, and en-passant
     '''
@@ -65,6 +66,7 @@ class GameState:
         self.updateCastleRights(move)
         self.castleRightsLog.append(CastleRights(self.currentCastlingRight.wks, self.currentCastlingRight.bks,
                                                  self.currentCastlingRight.wqs, self.currentCastlingRight.bqs))
+
     '''
     Undo the last move made
     '''
@@ -99,6 +101,7 @@ class GameState:
                 else: # queenside
                     self.board[move.endRow][move.endCol-2] = self.board[move.endRow][move.endCol+1]
                     self.board[move.endRow][move.endCol+1] = '--'
+
     '''
     Update the castling rights given the move
     '''
@@ -121,6 +124,7 @@ class GameState:
                     self.currentCastlingRight.bqs = False
                 elif move.startCol == 7: # right rook
                     self.currentCastlingRight.bks = False
+
     '''
     All moves consider checks
     '''
@@ -155,6 +159,7 @@ class GameState:
         self.enpassantPossible = tempEnpassantPossible
         self.currentCastlingRight = tempCastleRights
         return moves
+
     '''
     Determine if current player is in check
     '''
@@ -163,6 +168,7 @@ class GameState:
             return self.squareUnderAttack(self.whiteKingLocation[0], self.whiteKingLocation[1])
         else:
             return self.squareUnderAttack(self.blackKingLocation[0], self.blackKingLocation[1])
+
     '''
     Determine if current player is in check
     '''
@@ -222,7 +228,7 @@ class GameState:
                     moves.append(Move((r, c), (r + 1, c + 1), self.board))
                 elif (r+1, c+1) == self.enpassantPossible:
                     moves.append(Move((r, c), (r+1, c+1), self.board, isEnpassantMove=True))
-        # add pawn promotions later
+
     '''
     Get all the rook moves for the pawn located at row, col and these moves to the list
     '''
@@ -243,6 +249,7 @@ class GameState:
                         break
                 else:  # off board
                     break
+
     '''
     Get all the knight moves for the pawn located at row, col and these moves to the list
     '''
@@ -256,6 +263,7 @@ class GameState:
                 endPiece = self.board[endRow][endCol]
                 if endPiece[0] != allyColor:    # non-ally piece
                     moves.append(Move((r, c), (endRow, endCol), self.board))
+
     '''
     Get all the bishop moves for the pawn located at row, col and these moves to the list
     '''
@@ -276,12 +284,14 @@ class GameState:
                         break
                 else:  # off board
                     break
+
     '''
     Get all the queen moves for the pawn located at row, col and these moves to the list
     '''
     def getQueenMoves(self, r, c, moves):
         self.getRookMoves(r, c, moves)
         self.getBishopMoves(r, c, moves)
+
     '''
     Get all the king moves for the pawn located at row, col and these moves to the list
     '''
@@ -357,7 +367,6 @@ class Move:
         if isinstance(other, Move):
             return self.moveID == other.moveID
         return False
-
 
     def getChessNotation(self):
         return self.getRanksFile(self.startRow, self.startCol) + self.getRanksFile(self.endRow, self.endCol)
