@@ -125,9 +125,6 @@ def highlightSquares(screen, gs, validMoves, sqSelected):
         s.set_alpha(150)  # transparency value-> transparent; 255 opaque
         s.fill(p.Color('red'))
         screen.blit(s, (gs.moveLog[-1].endCol * SQ_SIZE, gs.moveLog[-1].endRow * SQ_SIZE))
-    '''
-    implement highlighting the last move
-    '''
 
 '''
 Responsible for all graphics within a current game state.
